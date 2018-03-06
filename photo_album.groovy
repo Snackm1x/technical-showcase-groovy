@@ -2,16 +2,17 @@ import java.net.*
 import groovy.json.*
 import java.util.regex.*
 
-def input = null
-
-while(!input?.equalsIgnoreCase("Q")) {
-    String consoleDialog = 'Please input photo-album or photo-id followed by a number (ex: photo-album 3) OR enter Q to quit: '
-    input = System.console().readLine consoleDialog
-    if (verifyInput(input)) {
-        printPhotos(input)
-    } else {
-        (!input?.equalsIgnoreCase("Q")) ? println("Input " + input + " invalid. Please try again.") :
-                println("Goodbye")
+protected void main(){
+    def input = null
+    while(!input?.equalsIgnoreCase("Q")) {
+        String consoleDialog = 'Please input photo-album or photo-id followed by a number (ex: photo-album 3) OR enter Q to quit: '
+        input = System.console().readLine consoleDialog
+        if (verifyInput(input)) {
+            printPhotos(input)
+        } else {
+            (!input?.equalsIgnoreCase("Q")) ? println("Input " + input + " invalid. Please try again.") :
+                    println("Goodbye")
+        }
     }
 }
 
@@ -32,3 +33,5 @@ protected URL buildURLFromInput(String input){
     def id = input.findAll { it =~ /\d/ }.join()
     new URL(addr + id)
 }
+
+main()
